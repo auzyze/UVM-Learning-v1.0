@@ -1,12 +1,23 @@
 
 
-
 class my_test extends uvm_test;
   `uvm_component_utils(my_test)
   
   
   
   my_env env;
+  
+  
+  //-----------------------------------------------------------------------
+  //use new function or create function?
+  //-----------------------------------------------------------------------
+  
+  
+  //funciton new(string name="my_test", uvm_component parent=null);
+  //super.new(name, parent);
+  //env = new("env",this);
+  //endfunction
+  
   
   function void build;
     super.build();
@@ -30,6 +41,12 @@ class my_test extends uvm_test;
     env = top::type_id::create("env",this);  // what kind of hierarchy does "top" indicate?
     
   endfunction :build
+  
+  
+  virtual task run();
+  #3000ns;
+  global_stop_request();
+  endtask
   
 
 endclass :my_test
