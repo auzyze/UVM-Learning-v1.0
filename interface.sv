@@ -1,0 +1,30 @@
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+`ifndef GUARD_INTERFACE
+`define GUARD_INTERFACE
+
+/////////////////////////////////////////////////////////////
+// INTERFACE OF WRITING PORT OF SYNC FIFO
+/////////////////////////////////////////////////////////////
+
+interface wr_interface(input bit clock);
+
+parameter setup_time = 5ns;
+parameter hold_time = 3ns;
+
+wire  [7:0]     wr_data;
+wire            wr_en;
+
+clocking cb@(posedge clock);
+default input #setup_time output #hold_time;
+input wr_data;
+input wr_en;
+endclocking:cb;
+
+modport WR(clocking cb, input clock);
+
+endinterface :wr_interface
+
+`endif
