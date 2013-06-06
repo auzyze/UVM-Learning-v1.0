@@ -19,6 +19,10 @@
 `include "uvm.svh"
 import uvm_pkg::*;
 
+
+typedef class my_config;      //why define this type ???
+
+
 module top();
 
 
@@ -75,6 +79,24 @@ async_fifo A_FIFO (
                     .empty  (r_intf.empty),
                     .aempty (r_intf.aempty)
                   );
+
+
+/////////////////////////////////////////////////////////////
+// configuration instance
+//
+my_config m_cfg;
+
+intial
+begin
+  m_cfg = new();            //why use "new" instead of "create" ??
+  cfg.wr_intf = wr_intf;    //what is the result of these two clauses ???
+  cfg.rd_intf = rd_intf;
+
+  run_test;
+
+end
+
+
 
 
 endmodule:top
