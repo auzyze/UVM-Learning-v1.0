@@ -19,8 +19,8 @@ wire            wr_en;
 
 clocking cb@(posedge clock);
 default input #setup_time output #hold_time;
-input wr_data;
-input wr_en;
+output wr_data;
+output wr_en;
 endclocking:cb;
 
 modport WR(clocking cb, input clock);
